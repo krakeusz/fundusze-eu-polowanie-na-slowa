@@ -1,0 +1,312 @@
+[gd_scene load_steps=20 format=3 uid="uid://cdn73ry64ebuo"]
+
+[ext_resource type="PackedScene" uid="uid://di2gjo4db0mnt" path="res://world_game.tscn" id="1_eewoe"]
+[ext_resource type="Script" path="res://FortuneGame.gd" id="2_wbbpu"]
+[ext_resource type="Script" path="res://SummaryScreen.gd" id="3_56uqt"]
+[ext_resource type="Texture2D" uid="uid://cimxe1equsqin" path="res://img/background_fioletowy.png" id="4_5pqud"]
+[ext_resource type="StyleBox" uid="uid://gqscpbu1od1b" path="res://PanelStylebox.tres" id="4_ohg7w"]
+[ext_resource type="Texture2D" uid="uid://uro0k24gcia6" path="res://img/X.png" id="5_huhg1"]
+[ext_resource type="Script" path="res://GameScreen.gd" id="6_meyi5"]
+[ext_resource type="Texture2D" uid="uid://baveaj5hcbisw" path="res://img/Zagraj.png" id="6_v1trf"]
+[ext_resource type="Texture2D" uid="uid://bajb15um30hiy" path="res://img/Zagraj_-_szary.png" id="7_3eob2"]
+[ext_resource type="StyleBox" uid="uid://bnelqd45ryac2" path="res://CharPasswordStylebox.tres" id="7_sg2k0"]
+[ext_resource type="StyleBox" uid="uid://8ao1cac8ncld" path="res://EmptyPasswordStylebox.tres" id="8_mi3h0"]
+[ext_resource type="LabelSettings" uid="uid://br4046kiy61e6" path="res://PasswordLabelSettings.tres" id="9_bd180"]
+[ext_resource type="Script" path="res://CharButtonBlueprint.gd" id="10_km3yp"]
+
+[sub_resource type="SystemFont" id="SystemFont_wp1tu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2uefd"]
+texture = ExtResource("6_v1trf")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f70xr"]
+texture = ExtResource("6_v1trf")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3jhp6"]
+texture = ExtResource("7_3eob2")
+
+[sub_resource type="SystemFont" id="SystemFont_ndj5t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_up5hl"]
+bg_color = Color(0.784314, 0.752941, 0.301961, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.223529, 0.223529, 0.223529, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Root" type="Node2D"]
+
+[node name="WorldGame" parent="." instance=ExtResource("1_eewoe")]
+
+[node name="FortuneGame" type="Node2D" parent="."]
+visible = false
+script = ExtResource("2_wbbpu")
+
+[node name="SummaryScreen" type="Node2D" parent="FortuneGame"]
+visible = false
+script = ExtResource("3_56uqt")
+
+[node name="PanelContainer" type="PanelContainer" parent="FortuneGame/SummaryScreen"]
+offset_left = 7.0
+offset_top = 224.0
+offset_right = 424.0
+offset_bottom = 708.0
+theme_override_styles/panel = ExtResource("4_ohg7w")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FortuneGame/SummaryScreen/PanelContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="FortuneGame/SummaryScreen/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 150)
+layout_mode = 2
+texture = ExtResource("4_5pqud")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="TextureButton" type="TextureButton" parent="FortuneGame/SummaryScreen/PanelContainer/VBoxContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+texture_normal = ExtResource("5_huhg1")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="GridContainer" type="GridContainer" parent="FortuneGame/SummaryScreen/PanelContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="FortuneGame/SummaryScreen/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_wp1tu")
+theme_override_font_sizes/font_size = 18
+text = "Kategoria inwestycji:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="FortuneGame/SummaryScreen/PanelContainer/VBoxContainer/GridContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(220, 60)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Inne, niewyszczególnione usługi"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="FortuneGame/SummaryScreen/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_wp1tu")
+theme_override_font_sizes/font_size = 18
+text = "Wartość projektu:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="FortuneGame/SummaryScreen/PanelContainer/VBoxContainer/GridContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(220, 60)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "3 104 663 zł"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label5" type="Label" parent="FortuneGame/SummaryScreen/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_wp1tu")
+theme_override_font_sizes/font_size = 18
+text = " Dofinansowanie z UE:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label6" type="Label" parent="FortuneGame/SummaryScreen/PanelContainer/VBoxContainer/GridContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(220, 60)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "3 104 663 zł"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="FortuneGame/SummaryScreen/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="Button" type="Button" parent="FortuneGame/SummaryScreen/PanelContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_2uefd")
+theme_override_styles/hover = SubResource("StyleBoxTexture_f70xr")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_3jhp6")
+
+[node name="DescriptionScreen" type="Node2D" parent="FortuneGame"]
+visible = false
+
+[node name="Panel" type="Panel" parent="FortuneGame/DescriptionScreen"]
+offset_right = 438.0
+offset_bottom = 945.0
+theme_override_styles/panel = ExtResource("4_ohg7w")
+
+[node name="Label" type="Label" parent="FortuneGame/DescriptionScreen/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.029
+anchor_right = 0.635
+anchor_bottom = 0.029
+offset_right = 158.0
+offset_bottom = 37.0
+theme_override_fonts/font = SubResource("SystemFont_ndj5t")
+theme_override_font_sizes/font_size = 30
+text = "Opis projektu"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="FortuneGame/DescriptionScreen/Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 106.0
+offset_right = 417.0
+offset_bottom = 830.0
+
+[node name="Label2" type="Label" parent="FortuneGame/DescriptionScreen/Panel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Przedmiotem projektu jest przeprowadzenie prac B+R, które doprowadzą do powstania prototypu systemu wykrywającego anomalie w użytkowaniu energii elektrycznej (dalej ee) w stosunku do prognoz. Poprzez sprawnie działający system, spółki obrotu będące jego głównymi odbiorcami otrzymają narzędzie, które pozwoli im na ______ ___________ ____________ ee w okresie długofalowym oraz na bieżące monitorowanie zużycia ee u swoich klientów. Korzystając z narzędzia, spółki będą mogły wykrywać i obserwować nadmierne skoki/spadki poboru, zwiększenia i zmniejszenia zużycia niezgodne z prognozami i korygować je racjonalizując tym samym własne zamówienia na ee na giełdzie. W celu stworzenia systemu zostaną wykorzystane narzędzia sztucznej inteligencji oraz uczenia maszynowego. Głównym elementem procesu badawczego będzie stworzenie typologii anomalii, czyli określenie takich cech zmian i odstępstw w zużyciu energii, które mają największy wpływ na biznesową działalność spółki, oraz wypracowanie algorytmu, który będzie je wykrywał. Badania przemysłowe skoncentrują się na przygotowaniu i połączeniu typologii anomalii, algorytmu oraz modułu, za pomocą którego możliwa będzie konfiguracja wystąpienia anomalii wraz z jej obsługą w systemie. Prototyp systemu zostanie przetestowany w warunkach laboratoryjnych i ostatecznie w warunkach rzeczywistych, aby potwierdzić skuteczność jego działania. Cel projektu, którym jest racjonalizacja zamówień na ee przez spółki obrotu, jest odpowiedzią na wyzwania zmieniającego się rynku ee, na którym na bieżąco zmieniają się modele korzystania z ee. Obecnie dominujący model, w którym klient jest wyłącznie odbiorcą, zmienia się. Numer_referencyjny_programu_pomocowego: SA.41471(2015/X) Przeznaczenie_pomocy_publicznej: art: 25 rozporządzenia KE nr 651/2014 z dnia 17 czerwca 2014 r. uznające niektóre rodzaje pomocy za zgodne z rynkiem wewnętrznym w stosowaniu art. 107 i 108 Traktatu (Dz. Urz. UE L 187/1 z 26.06.2014)."
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="FortuneGame/DescriptionScreen/Panel"]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 868.0
+offset_right = 393.0
+offset_bottom = 912.0
+text = "Graj"
+
+[node name="GameScreen" type="Node2D" parent="FortuneGame" node_paths=PackedStringArray("passwordContainer", "inputContainer", "resultLabel")]
+visible = false
+script = ExtResource("6_meyi5")
+passwordContainer = NodePath("PanelContainer/VBoxContainer/MarginContainer/PasswordContainer")
+inputContainer = NodePath("PanelContainer/VBoxContainer/MarginContainer2/InputContainer")
+charPasswordStyleBox = ExtResource("7_sg2k0")
+emptyPasswordStyleBox = ExtResource("8_mi3h0")
+passwordLabelSettings = ExtResource("9_bd180")
+triesLeft = 8
+resultLabel = NodePath("PanelContainer/VBoxContainer/MarginContainer3/ResultLabel")
+
+[node name="PanelContainer" type="PanelContainer" parent="FortuneGame/GameScreen"]
+offset_right = 437.0
+offset_bottom = 947.0
+theme_override_styles/panel = ExtResource("4_ohg7w")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FortuneGame/GameScreen/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="FortuneGame/GameScreen/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PasswordContainer" type="GridContainer" parent="FortuneGame/GameScreen/PanelContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+columns = 10
+
+[node name="MarginContainer2" type="MarginContainer" parent="FortuneGame/GameScreen/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="InputContainer" type="GridContainer" parent="FortuneGame/GameScreen/PanelContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+columns = 7
+
+[node name="MarginContainer3" type="MarginContainer" parent="FortuneGame/GameScreen/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="ResultLabel" type="Label" parent="FortuneGame/GameScreen/PanelContainer/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Zostało X "
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="EmptyPanelBlueprint" type="Panel" parent="FortuneGame/GameScreen"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 50.0
+theme_override_styles/panel = ExtResource("8_mi3h0")
+
+[node name="CharPanelBlueprint" type="Panel" parent="FortuneGame/GameScreen"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 50.0
+theme_override_styles/panel = ExtResource("7_sg2k0")
+
+[node name="Label" type="Label" parent="FortuneGame/GameScreen/CharPanelBlueprint"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -17.0
+offset_right = 20.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "A"
+label_settings = ExtResource("9_bd180")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="CharButtonBlueprint" type="Button" parent="FortuneGame/GameScreen"]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_up5hl")
+text = "A"
+script = ExtResource("10_km3yp")
+
+[node name="Timer" type="Timer" parent="FortuneGame/GameScreen"]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="minigame_triggered" from="WorldGame" to="FortuneGame" method="_on_world_game_minigame_triggered"]
+[connection signal="quitting" from="FortuneGame" to="WorldGame" method="_on_fortune_game_quitting"]
+[connection signal="pressed" from="FortuneGame/SummaryScreen/PanelContainer/VBoxContainer/TextureRect/TextureButton" to="FortuneGame" method="_on_summary_exit_button_pressed"]
+[connection signal="pressed" from="FortuneGame/SummaryScreen/PanelContainer/VBoxContainer/MarginContainer/Button" to="FortuneGame" method="_on_summary_accepted_button_pressed"]
+[connection signal="pressed" from="FortuneGame/DescriptionScreen/Panel/Button" to="FortuneGame" method="_on_description_accepted_button_pressed"]
+[connection signal="exit_game" from="FortuneGame/GameScreen" to="FortuneGame" method="_on_game_screen_exit_game"]
+[connection signal="pressed" from="FortuneGame/GameScreen/CharButtonBlueprint" to="FortuneGame/GameScreen/CharButtonBlueprint" method="_on_pressed"]
+[connection signal="timeout" from="FortuneGame/GameScreen/Timer" to="FortuneGame/GameScreen" method="_on_timer_timeout"]

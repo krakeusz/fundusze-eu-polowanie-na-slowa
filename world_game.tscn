@@ -1,0 +1,120 @@
+[gd_scene load_steps=13 format=3 uid="uid://di2gjo4db0mnt"]
+
+[ext_resource type="Script" path="res://WorldGame.gd" id="1_3wc1s"]
+[ext_resource type="Texture2D" uid="uid://d4hn3v08q24wa" path="res://img/Mapa1.png" id="2_4mjc8"]
+[ext_resource type="Texture2D" uid="uid://dsxg083bg4g1t" path="res://img/Piny_Hy23_1/1.png" id="3_ykhru"]
+[ext_resource type="Script" path="res://Pin1.gd" id="4_57iqw"]
+[ext_resource type="Texture2D" uid="uid://ubkx2slkpnh" path="res://img/Piny_Hy23_1/4.png" id="5_wk4tp"]
+[ext_resource type="Texture2D" uid="uid://c7ho7wg3dbmdd" path="res://img/Piny_Hy23_1/2.png" id="6_0d04u"]
+[ext_resource type="Texture2D" uid="uid://d0uxobnx4praa" path="res://img/Piny_Hy23_1/5.png" id="7_55yhw"]
+[ext_resource type="Texture2D" uid="uid://bmhw6g27ps3xh" path="res://img/Piny_Hy23_1/3.png" id="8_ekwy5"]
+[ext_resource type="Texture2D" uid="uid://ipalkw1kv3ra" path="res://img/Piny_Hy23_1/6.png" id="9_do23f"]
+[ext_resource type="Texture2D" uid="uid://dds6udl6ay28h" path="res://img/woman.png" id="10_oeiuo"]
+
+[sub_resource type="Animation" id="Animation_axysl"]
+resource_name = "player_movement"
+length = 24.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Map:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.4, 6.8, 8.3, 11, 12.5, 14.1, 17.4, 23),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-1226, -1330), Vector2(-1250, -1050), Vector2(-760, -970), Vector2(-760, -970), Vector2(-760, -732.308), Vector2(-600, -732.308), Vector2(-450, -940), Vector2(-200, -920), Vector2(-270, -200)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g2bw1"]
+_data = {
+"player_movement_1": SubResource("Animation_axysl")
+}
+
+[node name="WorldGame" type="Node2D" node_paths=PackedStringArray("moveAnimation")]
+script = ExtResource("1_3wc1s")
+moveAnimation = NodePath("MoveAnimation")
+closeDistance = 150
+
+[node name="Map" type="TextureRect" parent="."]
+z_index = -2
+offset_left = -1226.0
+offset_top = -1330.0
+offset_right = 4774.0
+offset_bottom = 4670.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_4mjc8")
+
+[node name="Pins" type="Node2D" parent="Map"]
+z_as_relative = false
+position = Vector2(746, 228)
+
+[node name="Pin1" type="TextureRect" parent="Map/Pins"]
+z_as_relative = false
+offset_left = 1184.0
+offset_top = 2849.5
+offset_right = 1696.0
+offset_bottom = 3361.5
+scale = Vector2(0.3, 0.3)
+pivot_offset = Vector2(256, 512)
+texture = ExtResource("3_ykhru")
+script = ExtResource("4_57iqw")
+closePinResource = ExtResource("5_wk4tp")
+metadata/_edit_use_anchors_ = true
+
+[node name="Pin2" type="TextureRect" parent="Map/Pins"]
+z_as_relative = false
+offset_left = 1401.5
+offset_top = 3287.0
+offset_right = 1913.5
+offset_bottom = 3799.0
+scale = Vector2(0.3, 0.3)
+pivot_offset = Vector2(256, 512)
+texture = ExtResource("6_0d04u")
+script = ExtResource("4_57iqw")
+closePinResource = ExtResource("7_55yhw")
+metadata/_edit_use_anchors_ = true
+
+[node name="Pin3" type="TextureRect" parent="Map/Pins"]
+z_as_relative = false
+offset_left = 469.0
+offset_top = 839.5
+offset_right = 981.0
+offset_bottom = 1351.5
+scale = Vector2(0.3, 0.3)
+pivot_offset = Vector2(256, 512)
+texture = ExtResource("8_ekwy5")
+script = ExtResource("4_57iqw")
+closePinResource = ExtResource("9_do23f")
+metadata/_edit_use_anchors_ = true
+
+[node name="Player" type="TextureRect" parent="."]
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = 260.0
+offset_right = 481.0
+offset_bottom = 772.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(256, 256)
+texture = ExtResource("10_oeiuo")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="MoveAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g2bw1")
+}
+
+[connection signal="timeout" from="Timer" to="." method="_on_start_timer_timeout"]
+[connection signal="animation_finished" from="MoveAnimation" to="." method="_on_animation_player_animation_finished"]
